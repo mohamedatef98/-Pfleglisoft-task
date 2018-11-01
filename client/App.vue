@@ -22,7 +22,9 @@
                         <div class="img-container">
                             <img src="http://www.touchstoneone.com/wp-content/uploads/2017/04/New-Customer-Touchstone-6759-Icon-Post-Set-02@4x-1.jpg" alt="">
                         </div>
-                        <h1>{{ Math.round( newCustomers / requests * 100 ) }}%</h1>
+                        <h1>{{ requests != 0 ?
+                             (Math.round( newCustomers / requests * 100 )):
+                             '0' }}%</h1>
                         <h4>Customer winning rate</h4>
                         <p>New Customers: {{newCustomers}}</p>
                         <p>Requests: {{requests}}</p>
@@ -33,7 +35,9 @@
                         <div class="img-container">
                             <img src="https://png.icons8.com/metro/1600/checkmark.png" alt="">
                         </div>
-                        <h1>{{ Math.round( fulfilledOrders / orders * 100 ) }}%</h1>
+                        <h1>{{ orders != 0 ?
+                             (Math.round( fulfilledOrders / orders * 100 )) : 
+                             '0' }}%</h1>
                         <h4>Orders Fulfillment</h4>
                         <p>Fulfilled Orders: {{fulfilledOrders}}</p>
                         <p>Orders: {{orders}}</p>
@@ -44,7 +48,9 @@
                         <div class="img-container">
                             <img src="https://www.qminder.com/resources/img/blog/customer-satisfaction-score.png" alt="">
                         </div>
-                        <h1>{{Math.round(ratings / ratingsCount / 25 * 100)}}%</h1>
+                        <h1>{{ratingsCount !== 0 ? 
+                            (Math.round(ratings / ratingsCount / 25 * 100))
+                            : '0' }}%</h1>
                         <h4>Customer Satisfaction</h4>
                         <p>Received Ratings: {{ratingsCount}}</p>
                     </div>
