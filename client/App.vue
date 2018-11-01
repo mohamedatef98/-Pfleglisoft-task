@@ -49,7 +49,6 @@
                         <p>Received Ratings: {{ratingsCount}}</p>
                     </div>
                 </v-flex>
-                <!-- <h1 v-for="(order, i) in ratings" :key="i">{{ order }}</h1> -->
             </v-layout>
         </v-flex>
     </v-layout>
@@ -64,88 +63,65 @@ export default {
   components: {
     Select
   },
-  data: () => {
-    return {
-      cards: [
-        {
-          percentage: "",
-          title: "Customer Winning Rate",
-          paragraphs: [
-            { title: "New Customers", value: "" },
-            { title: "Requests", value: "" }
-          ]
-        },
-        {
-          percentage: "",
-          title: "Order Fulfillment",
-          paragraphs: [
-            { title: "Fulfilled Orders", value: "" },
-            { title: "Orders", value: "" }
-          ]
-        },
-        {
-          percentage: "",
-          title: "Customer Satisfaction",
-          paragraphs: [{ title: "Received Rating", value: "" }]
-        }
-      ]
-    };
-  },
   methods: {
-      sumRate(rating){
-
-          return (+rating['household-supply']) + (+rating['communication'])
-                + (+rating['visual-appearance']) + (+rating['basic-care'])
-                + (+rating['overall']);
-      }
+    sumRate(rating) {
+      return (
+        +rating["household-supply"] +
+        +rating["communication"] +
+        +rating["visual-appearance"] +
+        +rating["basic-care"] +
+        +rating["overall"]
+      );
+    }
   },
   meteor: {
-    orders(){
-        return Orders.find({}).fetch().length;
+    orders() {
+      return Orders.find({}).fetch().length;
     },
-    fulfilledOrders(){
-        return Orders.find({"fulfilled": true}).fetch().length;
+    fulfilledOrders() {
+      return Orders.find({ fulfilled: true }).fetch().length;
     },
-    ratingsCount(){
-        return Ratings.find({}).fetch().length;
+    ratingsCount() {
+      return Ratings.find({}).fetch().length;
     },
-    ratings(){
-        let ratings = Ratings.find({}).fetch();
+    ratings() {
+      let ratings = Ratings.find({}).fetch();
 
-        return ratings.reduce((acc, rating)=>{
-            acc += this.sumRate(rating);
-            return acc;
-        }, 0);
+      return ratings.reduce((acc, rating) => {
+        acc += this.sumRate(rating);
+        return acc;
+      }, 0);
     },
-    newCustomers(){
-        return Customers.find({'new': true}).fetch().length;
+    newCustomers() {
+      return Customers.find({ new: true }).fetch().length;
     },
-    requests(){
-        return Requests.find({}).fetch().length;
+    requests() {
+      return Requests.find({}).fetch().length;
     }
   }
 };
 </script>
 
 <style scoped>
-    h2 {
-        margin: 1rem;
-    }
-    .card{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+h2 {
+  margin: 1rem;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-    .img-container img{
-        height: 8rem;
-        max-width: 100%;
-    }
+.img-container img {
+  height: 8rem;
+  max-width: 100%;
+}
 
-    h1, h4{
-        margin: 0.5rem 0;
-    }
-    p{
-        margin: 0;
-    }
+h1,
+h4 {
+  margin: 0.5rem 0;
+}
+p {
+  margin: 0;
+}
 </style>
